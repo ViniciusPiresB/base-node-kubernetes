@@ -1,12 +1,27 @@
-version: '3'
-
+version: '3.8'
 services:
-  node:
-    build: .
-    command: "npm run dev"
+  api:
+    image: viniciuspiresb/base-node-kubernetes
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
     environment:
-      - NODE_ENV=production
+      DATABASE_URL: "postgres://user:password@postgres:5432/db"
+      NODE_ENV: "development"
+      PORT: 8000
+      JWT_SECRET_KEY: "${JWT_SECRET_KEY}"
     ports:
-      - "3000:3000"
-    expose:
-      - "3000"
+      - "8000:8000"
+  
+  postgres:
+    image: postgres:10.4
+    ports:
+      - "35000:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+volumes:
+  cache:
