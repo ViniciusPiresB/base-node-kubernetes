@@ -1,0 +1,52 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "api-demo",
+    "labels": {
+      "app": "api-demo"
+    }
+  },
+  "spec": {
+    "replicas": 4,
+    "selector": {
+      "matchLabels": {
+        "app": "api-demo"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "api-demo"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "api-demo",
+            "image": "viniciuspiresb/base-node-kubernetes",
+            "ports": [
+              {
+                "containerPort": 8000
+              }
+            ],
+            "env": [
+              {
+                "name": "POSTGRES_HOST",
+                "value": "postgres://user:password@postgres-svc:5432/db"
+              },
+              {
+                "name": "POSTGRES_DB",
+                "value": "db"
+              },
+              {
+                "name": "PORT",
+                "value": "8000"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

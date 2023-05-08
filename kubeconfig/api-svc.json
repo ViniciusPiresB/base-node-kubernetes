@@ -1,0 +1,24 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "api-demo-svc",
+    "labels": {
+      "version": "v1",
+      "app": "api-demo"
+    }
+  },
+  "spec": {
+    "selector": {
+      "app": "api-demo"
+    },
+    "type": "LoadBalancer",
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 8000,
+        "targetPort": 8000
+      }
+    ]
+  }
+}
