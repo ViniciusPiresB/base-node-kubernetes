@@ -1,6 +1,3 @@
-# BASE-NODE-DOCKER
+# BASE-NODE-KUBERNETES
 
-### How to use
-
-1. `docker build . -t viniciuspiresb/base-node-kubernetes`
-2. `docker-compose up`
+ In progress...
